@@ -11,7 +11,7 @@ public class Gather {
 
     public static void main(String[] args) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(
-                "IOAndNIO/Gather.txt");
+                "C:\\Users\\Hojun\\Desktop\\git\\JavaStudy\\IOAndNIO\\Gather-Scatter.txt");
 
         FileChannel channel = fileOutputStream.getChannel();
 
