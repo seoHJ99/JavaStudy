@@ -1,3 +1,5 @@
+package IO;
+
 import java.io.*;
 
 public class IOTimeTest {
@@ -7,13 +9,12 @@ public class IOTimeTest {
 
     public static void main(String[] args) {
 
-//        long time1 = measureRunTime(IOTest::copyDummyWithIO);
-//        System.out.println("버퍼를 사용하지 않을 경우 처리 시간 : " +time1 + " milli seconds");
+        long time1 = measureRunTime(IOTimeTest::copyDummyWithIO);
+        System.out.println("버퍼를 사용하지 않을 경우 처리 시간 : " +time1 + " milli seconds");
         long time2 = measureRunTime(IOTimeTest::copyDummyWithBufferIO);
         System.out.println("I/O 버퍼를 사용한 처리 시간 : " + time2 + " milli seconds");
         long time3 = measureRunTime(IOTimeTest::copyDummyWithBufferIOWithBufferSize);
         System.out.println("I/O 버퍼값을 정해준 처리 시간 : " + time3 + " milli seconds");
-
 
     }
 
