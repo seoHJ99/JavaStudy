@@ -18,10 +18,10 @@ public class MemoryMappedIo {
     // 자바 heap 이 아닌 네이티브 메모리에 저장하는게 전부이기에 버퍼를 갱신할때 다시 i/o 가 일어나게 된다.
     public static void main(String[] args) {
         long time = measureRunTime(MemoryMappedIo::mmioTest);
-        System.out.println("mmio 를 통한 파일 읽기: " + time + " millisecond");
+        System.out.println("mmio 를 통한 파일 읽기 속도: " + time + " millisecond");
 
         long time2 = measureRunTime(MemoryMappedIo::mmioTansferTest);
-        System.out.println("mmio 를 통한 파일 읽기: " + time2 + " millisecond");
+        System.out.println("mmio 를 통한 파일 전송 속도: " + time2 + " millisecond");
 
     }
 
