@@ -27,11 +27,9 @@ public class NonBlockingTest {
         Selector selector = Selector.open();
         server.register(selector, SelectionKey.OP_ACCEPT); // 서버는 항상 accept 상태로 연결을 대기하고 있어야 함
 
-        sendMessage("This is client1 test", 9090);// 클라이언트 메시지 발송
-
         while (true) { //연결이 들어올 때까지 대기
 
-            selector.select();// 준비된 채널이 있을 때까지 블로킹(스레드 정지)
+            selector.select();// 처리할 채널이 있을 때까지 블로킹(스레드 정지) 됨
 
             Set<SelectionKey> selectedKeys = selector.selectedKeys(); // selectedKeys 연결된 요청의 상태를 반환함
             Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
@@ -49,7 +47,7 @@ public class NonBlockingTest {
                     SocketChannel clientChannel = serverChannel.accept(); // 소켓 채널 연결
 
                     clientChannel.configureBlocking(false);
-                    clientChannel.register(selector, SelectionKey.OP_READ); // 클라이언트 채널을 읽을수 있는 상태로 변경
+                    clientChannel.register(selector, SelectionKey.OP_READ); // 클라이언트 채널의 요청을 read 하는 상태
 
                     System.out.println("연결 완료: " + clientChannel.getRemoteAddress());
 
@@ -78,23 +76,6 @@ public class NonBlockingTest {
                 }
             }
         }
-    }
-
-    public static SocketChannel sendMessage(String message, int port) throws IOException {
-        SocketChannel socketChannel = SocketChannel.open();
-        socketChannel.configureBlocking(false);
-        socketChannel.connect(new InetSocketAddress("localhost", port));
-
-        while (!socketChannel.finishConnect()) { // 연결 완료될 때까지 기다립니다.
-            System.out.println("연결중");
-        }
-
-        ByteBuffer buffer = ByteBuffer.wrap(message.getBytes());
-
-        while (buffer.hasRemaining()) {
-            socketChannel.write(buffer);
-        }
-        return socketChannel;
     }
 
 }
