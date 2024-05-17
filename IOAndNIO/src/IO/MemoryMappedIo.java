@@ -86,10 +86,8 @@ public class MemoryMappedIo {
             ByteBuffer originalData = fileData.getChannel()
                     .map(FileChannel.MapMode.READ_WRITE, 0L, size);
 
-
             Charset charset = Charset.defaultCharset();
             ByteBuffer newData = charset.encode("new Data");
-
 
             ByteBuffer combine = ByteBuffer.allocate((int) size+100);
             combine.put(newData);
